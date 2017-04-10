@@ -24,9 +24,9 @@ namespace prototype_calendarSystem
             DisplayValues(myCal, myDT);
             while (alive)
             {
-                Console.WriteLine("exit or next");
+                Console.WriteLine("exit or month, or day");
                 var userInput = Console.ReadLine();
-                if (userInput == "next")
+                if (userInput == "month")
                 {
                     // Adds 1 month.
                     myDT = myCal.AddMonths(myDT, 1);
@@ -34,6 +34,16 @@ namespace prototype_calendarSystem
                     // Displays the values of the DateTime.
 
                     Console.WriteLine("one month later");
+                    DisplayValues(myCal, myDT);
+                }
+                else if (userInput == "day")
+                {
+                    // Adds 1 day.
+                    myDT = myCal.AddDays(myDT, 1);
+
+                    // Displays the values of the DateTime.
+
+                    Console.WriteLine("one day later");
                     DisplayValues(myCal, myDT);
                 }
                 else if(userInput == "exit")
