@@ -27,7 +27,7 @@ namespace BookingSystem
 
         private void Loop_Tick(object sender, EventArgs e)
         {
-            if (isAdmin)
+            if (isAdmin && loggedIn)
             {
                 AdminCalendar.Show();
             }

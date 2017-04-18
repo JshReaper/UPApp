@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.UsernameBox = new System.Windows.Forms.TextBox();
             this.PasswordBox = new System.Windows.Forms.TextBox();
             this.BrugerLabel = new System.Windows.Forms.Label();
             this.KodeLabel = new System.Windows.Forms.Label();
             this.Login_Button = new System.Windows.Forms.Button();
+            this.AdminCalendar = new System.Windows.Forms.MonthCalendar();
+            this.Loop = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // UsernameBox
@@ -81,14 +84,6 @@
             this.Login_Button.UseVisualStyleBackColor = true;
             this.Login_Button.Click += new System.EventHandler(this.Login_Button_Click);
             // 
-            // Form1
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.components = new System.ComponentModel.Container();
-            this.AdminCalendar = new System.Windows.Forms.MonthCalendar();
-            this.Loop = new System.Windows.Forms.Timer(this.components);
-            this.SuspendLayout();
-            // 
             // AdminCalendar
             // 
             this.AdminCalendar.Location = new System.Drawing.Point(51, 35);
@@ -107,10 +102,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(388, 261);
+            this.ClientSize = new System.Drawing.Size(284, 255);
             this.Controls.Add(this.AdminCalendar);
-            this.Name = "Form1";
-            this.ClientSize = new System.Drawing.Size(246, 169);
             this.Controls.Add(this.Login_Button);
             this.Controls.Add(this.KodeLabel);
             this.Controls.Add(this.BrugerLabel);
@@ -118,11 +111,9 @@
             this.Controls.Add(this.UsernameBox);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
