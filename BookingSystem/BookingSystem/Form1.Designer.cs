@@ -39,6 +39,7 @@
             this.AdminCalendar.Name = "AdminCalendar";
             this.AdminCalendar.TabIndex = 0;
             this.AdminCalendar.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.AdminCalendar_DateChanged);
+            this.AdminCalendar.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.AdminCalendar_DateSelected);
             // 
             // Loop
             // 
@@ -50,7 +51,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(388, 261);
             this.Controls.Add(this.AdminCalendar);
             this.Name = "Form1";
             this.Text = "Form1";

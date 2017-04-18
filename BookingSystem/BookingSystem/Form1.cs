@@ -40,5 +40,42 @@ namespace BookingSystem
             isAdmin = true;
             AdminCalendar.ShowWeekNumbers = true;
         }
+
+        private void AdminCalendar_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            CreateTaskForm taskForm = new CreateTaskForm
+            {
+                Day = AdminCalendar.SelectionStart.Day,
+                Month = AdminCalendar.SelectionStart.Month
+            };
+            switch (AdminCalendar.SelectionStart.DayOfWeek)
+            {
+                case DayOfWeek.Sunday:
+                    taskForm.DayText = "Søndag";
+                    break;
+                case DayOfWeek.Monday:
+                    taskForm.DayText = "Mandag";
+                    break;
+                case DayOfWeek.Tuesday:
+                    taskForm.DayText = "Tirsdag";
+                    break;
+                case DayOfWeek.Wednesday:
+                    taskForm.DayText = "Onsdag";
+                    break;
+                case DayOfWeek.Thursday:
+                    taskForm.DayText = "Torsdag";
+                    break;
+                case DayOfWeek.Friday:
+                    taskForm.DayText = "Fredag";
+                    break;
+                case DayOfWeek.Saturday:
+                    taskForm.DayText = "Lørdag";
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            taskForm.Year = AdminCalendar.SelectionStart.Year;
+            taskForm.Show();
+        }
     }
 }
