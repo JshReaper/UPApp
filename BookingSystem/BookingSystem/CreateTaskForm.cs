@@ -16,7 +16,7 @@ namespace BookingSystem
         public string DayText { get; set; }
         public int Month { get; set; }
         public int Year { get; set; }
-        private string monthText;
+        private string _monthText;
         public CreateTaskForm()
         {
             InitializeComponent();
@@ -27,43 +27,43 @@ namespace BookingSystem
             switch (Month)
             {
                 case 1:
-                    monthText = "Januar";
+                    _monthText = "Januar";
                     break;
                 case 2:
-                    monthText = "Febuar";
+                    _monthText = "Febuar";
                     break;
                 case 3:
-                    monthText = "Marts";
+                    _monthText = "Marts";
                     break;
                 case 4:
-                    monthText = "April";
+                    _monthText = "April";
                     break;
                 case 5:
-                    monthText = "Maj";
+                    _monthText = "Maj";
                     break;
                 case 6:
-                    monthText = "Juni";
+                    _monthText = "Juni";
                     break;
                 case 7:
-                    monthText = "Juli";
+                    _monthText = "Juli";
                     break;
                 case 8:
-                    monthText = "August";
+                    _monthText = "August";
                     break;
                 case 9:
-                    monthText = "September";
+                    _monthText = "September";
                     break;
                 case 10:
-                    monthText = "Oktober";
+                    _monthText = "Oktober";
                     break;
                 case 11:
-                    monthText = "November";
+                    _monthText = "November";
                     break;
                 case 12:
-                    monthText = "December";
+                    _monthText = "December";
                     break;
             }
-            MonthAndDay.Text = $@"{Day} {monthText} {Year}";
+            MonthAndDay.Text = $@"{Day} {_monthText} {Year}";
             DayOfWeek.Text = DayText;
         }
 
