@@ -84,7 +84,32 @@
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.components = new System.ComponentModel.Container();
+            this.AdminCalendar = new System.Windows.Forms.MonthCalendar();
+            this.Loop = new System.Windows.Forms.Timer(this.components);
+            this.SuspendLayout();
+            // 
+            // AdminCalendar
+            // 
+            this.AdminCalendar.Location = new System.Drawing.Point(51, 35);
+            this.AdminCalendar.Name = "AdminCalendar";
+            this.AdminCalendar.TabIndex = 0;
+            this.AdminCalendar.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.AdminCalendar_DateChanged);
+            this.AdminCalendar.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.AdminCalendar_DateSelected);
+            // 
+            // Loop
+            // 
+            this.Loop.Enabled = true;
+            this.Loop.Interval = 40;
+            this.Loop.Tick += new System.EventHandler(this.Loop_Tick);
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(388, 261);
+            this.Controls.Add(this.AdminCalendar);
+            this.Name = "Form1";
             this.ClientSize = new System.Drawing.Size(246, 169);
             this.Controls.Add(this.Login_Button);
             this.Controls.Add(this.KodeLabel);
@@ -96,9 +121,15 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.MonthCalendar AdminCalendar;
+        private System.Windows.Forms.Timer Loop;
 
         private System.Windows.Forms.TextBox UsernameBox;
         private System.Windows.Forms.TextBox PasswordBox;
