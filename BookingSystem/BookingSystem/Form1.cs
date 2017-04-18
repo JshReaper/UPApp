@@ -43,10 +43,11 @@ namespace BookingSystem
 
         private void AdminCalendar_DateSelected(object sender, DateRangeEventArgs e)
         {
-            CreateTaskForm taskForm = new CreateTaskForm
+            var taskForm = new CreateTaskForm
             {
                 Day = AdminCalendar.SelectionStart.Day,
-                Month = AdminCalendar.SelectionStart.Month
+                Month = AdminCalendar.SelectionStart.Month,
+                Year = AdminCalendar.SelectionStart.Year
             };
             switch (AdminCalendar.SelectionStart.DayOfWeek)
             {
@@ -74,7 +75,6 @@ namespace BookingSystem
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            taskForm.Year = AdminCalendar.SelectionStart.Year;
             taskForm.Show();
         }
     }
