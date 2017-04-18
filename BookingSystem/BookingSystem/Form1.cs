@@ -13,7 +13,7 @@ namespace BookingSystem
     public partial class Form1 : Form
     {
         static int userID = 0;
-        static bool loggedIn = false;
+        static bool loggedIn;
         bool isAdmin;
         public Form1()
         {
