@@ -26,7 +26,9 @@ namespace BookingSystem
                 string userTable = "create table Users (id integer primary key, Username string, Password string, Name string, IsAdmin bool)";
                 SQLiteCommand commandOnCreate = new SQLiteCommand(userTable, dbConnOnCreate);
                 commandOnCreate.ExecuteNonQuery();
-
+                string user = "Insert into Users values(null, \"admin\", \"admin\", \"ADMINISTRATOR\", 1)";
+                commandOnCreate = new SQLiteCommand(user, dbConnOnCreate);
+                commandOnCreate.ExecuteNonQuery();
 
                 //end logic
                 dbConnOnCreate.Close();
@@ -36,7 +38,7 @@ namespace BookingSystem
 
         public static bool Authenticate(string Username, string Password)
         {
-            string retriver = string.Format("Select * from Users where Username = {0}", Username);
+            string retriver = string.Format("Select * from Users where Username = '{0}'", Username);
             SQLiteConnection dbCon = new SQLiteConnection("Data Source=Data.db;Version=3;");
             SQLiteCommand dbCom = new SQLiteCommand(retriver, dbCon);
             dbCon.Open();
@@ -45,19 +47,21 @@ namespace BookingSystem
             dr = dbCom.ExecuteReader();
             
             dr.Read();
-            if (dr.GetString(1) != Username)
+            if (dr.HasRows)
             {
-                dbCon.Close();
-                Debug.WriteLine("User was not found");
-                return false;
+                if (dr.GetString(1) != Username)
+                {
+                    dbCon.Close();
+                    Debug.WriteLine("User was not found");
+                    return false;
+                }
+                if (dr.GetString(1) == Username && dr.GetString(2) == Password)
+                {
+                    dbCon.Close();
+                    Debug.WriteLine("User is now loggedin");
+                    return true;
+                }
             }
-            if(dr.GetString(1) == Username && dr.GetString(2) == Password)
-            {
-                dbCon.Close();
-                Debug.WriteLine("User is now loggedin");
-                return true;
-            }
-
             //end logic
             dbCon.Close();
             Debug.WriteLine("Logic has failed");            
@@ -66,7 +70,7 @@ namespace BookingSystem
 
         public static int FindID(string Username)
         {
-            string retriver = string.Format("Select * from Users where Username = {0}", Username);
+            string retriver = string.Format("Select * from Users where Username = '{0}'", Username);
             SQLiteConnection dbCon = new SQLiteConnection("Data Source=Data.db;Version=3;");
             SQLiteCommand dbCom = new SQLiteCommand(retriver, dbCon);
             dbCon.Open();
@@ -76,8 +80,9 @@ namespace BookingSystem
 
 
             //end logic
+            int toReturn = dr.GetInt32(0);
             dbCon.Close();
-            return dr.GetInt32(0);
+            return toReturn;
         }
     }
 }
