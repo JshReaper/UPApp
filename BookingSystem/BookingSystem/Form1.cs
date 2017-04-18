@@ -12,6 +12,8 @@ namespace BookingSystem
 {
     public partial class Form1 : Form
     {
+        static int userID = 0;
+        static bool loggedIn = false;
         bool isAdmin;
         public Form1()
         {
@@ -25,7 +27,7 @@ namespace BookingSystem
 
         private void Loop_Tick(object sender, EventArgs e)
         {
-            if (isAdmin)
+            if (isAdmin && loggedIn)
             {
                 AdminCalendar.Show();
             }
@@ -76,6 +78,45 @@ namespace BookingSystem
                     throw new ArgumentOutOfRangeException();
             }
             taskForm.Show();
+        }
+
+
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+    
+        private void UsernameBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Login_Button_Click(object sender, EventArgs e)
+        {
+            DatabaseManager.GenerateDataBase();
+            if (DatabaseManager.Authenticate(UsernameBox.Text, PasswordBox.Text))
+            {
+                userID = DatabaseManager.FindID(UsernameBox.Text);
+                Login();
+            }
+        }
+
+        private void Login()
+        {
+            loggedIn = true;
+            UsernameBox.Hide();
+            PasswordBox.Hide();
+            Login_Button.Hide();
+            BrugerLabel.Hide();
+            KodeLabel.Hide();
+
+        }
+
+        private void BrugerLabel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
