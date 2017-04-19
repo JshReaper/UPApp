@@ -30,7 +30,7 @@
         {
             this.userList = new System.Windows.Forms.ListBox();
             this.listScroll = new System.Windows.Forms.VScrollBar();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.infoBox = new System.Windows.Forms.TextBox();
             this.deleteBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -43,6 +43,7 @@
             this.userList.Size = new System.Drawing.Size(120, 244);
             this.userList.TabIndex = 0;
             this.userList.Click += new System.EventHandler(this.userList_Click);
+            this.userList.SelectedIndexChanged += new System.EventHandler(this.userList_SelectedIndexChanged);
             // 
             // listScroll
             // 
@@ -51,13 +52,13 @@
             this.listScroll.Size = new System.Drawing.Size(18, 244);
             this.listScroll.TabIndex = 1;
             // 
-            // textBox1
+            // infoBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(221, 29);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(274, 244);
-            this.textBox1.TabIndex = 2;
+            this.infoBox.Location = new System.Drawing.Point(221, 29);
+            this.infoBox.Multiline = true;
+            this.infoBox.Name = "infoBox";
+            this.infoBox.Size = new System.Drawing.Size(274, 244);
+            this.infoBox.TabIndex = 2;
             // 
             // deleteBtn
             // 
@@ -67,6 +68,7 @@
             this.deleteBtn.TabIndex = 3;
             this.deleteBtn.Text = "Slet";
             this.deleteBtn.UseVisualStyleBackColor = true;
+            this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             // 
             // UserManager
             // 
@@ -74,7 +76,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(575, 448);
             this.Controls.Add(this.deleteBtn);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.infoBox);
             this.Controls.Add(this.listScroll);
             this.Controls.Add(this.userList);
             this.Name = "UserManager";
@@ -88,7 +90,7 @@
 
         private System.Windows.Forms.ListBox userList;
         private System.Windows.Forms.VScrollBar listScroll;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox infoBox;
         private System.Windows.Forms.Button deleteBtn;
     }
 }
