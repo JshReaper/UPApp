@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace BookingSystem
 {
-    static class DatabaseManager
+    public static class DatabaseManager
     {
 
         public static void GenerateDataBase()

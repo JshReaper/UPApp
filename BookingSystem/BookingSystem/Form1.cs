@@ -105,6 +105,11 @@ namespace BookingSystem
                 userID = DatabaseManager.FindID(UsernameBox.Text);
                 Login();
             }
+            else if (DatabaseManager.Authenticate(UsernameBox.Text, PasswordBox.Text) == false)
+            {
+                cridentials.Text = "Brugernavn og Kode passer ikke";
+                cridentials.ForeColor = Color.Red;
+            }
         }
 
         private void Login()
@@ -115,7 +120,7 @@ namespace BookingSystem
             Login_Button.Hide();
             BrugerLabel.Hide();
             KodeLabel.Hide();
-
+            cridentials.Hide();
         }
 
         private void BrugerLabel_Paint(object sender, PaintEventArgs e)
