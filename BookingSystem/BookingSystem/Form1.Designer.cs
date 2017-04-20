@@ -102,7 +102,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 255);
+            this.ClientSize = new System.Drawing.Size(309, 255);
             this.Controls.Add(this.AdminCalendar);
             this.Controls.Add(this.Login_Button);
             this.Controls.Add(this.KodeLabel);
