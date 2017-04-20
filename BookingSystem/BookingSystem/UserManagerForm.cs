@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
+using System.Diagnostics;
 
 namespace BookingSystem
 {
@@ -70,7 +71,7 @@ namespace BookingSystem
             }
             catch
             {
-
+                
             }
             dbConn.Close();
         }
@@ -79,11 +80,17 @@ namespace BookingSystem
         {
             SQLiteConnection dbConn = new SQLiteConnection("data source = UserDatabase.db;Version=3;");
             dbConn.Open();
-            string Query = "delete * from Users where name = '" + userList.SelectedItem + "' ;";
+            string Query = "delete * from Users where Name = '" + userList.SelectedItem + "' ;";
             SQLiteCommand deleteCommand = new SQLiteCommand(Query, dbConn);
 
-            deleteCommand.ExecuteNonQuery();
-
+            try
+            {
+                deleteCommand.ExecuteNonQuery();
+            }
+            catch
+            {
+                Debug.WriteLine("No possible way to delete user when non is chosen or exist.");
+            }
             dbConn.Close();
         }
     }
