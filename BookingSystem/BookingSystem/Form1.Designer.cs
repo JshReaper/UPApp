@@ -36,6 +36,7 @@
             this.Login_Button = new System.Windows.Forms.Button();
             this.AdminCalendar = new System.Windows.Forms.MonthCalendar();
             this.Loop = new System.Windows.Forms.Timer(this.components);
+            this.cridentials = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // UsernameBox
@@ -86,7 +87,7 @@
             // 
             // AdminCalendar
             // 
-            this.AdminCalendar.Location = new System.Drawing.Point(51, 35);
+            this.AdminCalendar.Location = new System.Drawing.Point(50, 38);
             this.AdminCalendar.Name = "AdminCalendar";
             this.AdminCalendar.TabIndex = 0;
             this.AdminCalendar.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.AdminCalendar_DateChanged);
@@ -98,11 +99,20 @@
             this.Loop.Interval = 40;
             this.Loop.Tick += new System.EventHandler(this.Loop_Tick);
             // 
+            // cridentials
+            // 
+            this.cridentials.AutoSize = true;
+            this.cridentials.Location = new System.Drawing.Point(91, 22);
+            this.cridentials.Name = "cridentials";
+            this.cridentials.Size = new System.Drawing.Size(0, 13);
+            this.cridentials.TabIndex = 5;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(309, 255);
+            this.Controls.Add(this.cridentials);
             this.Controls.Add(this.AdminCalendar);
             this.Controls.Add(this.Login_Button);
             this.Controls.Add(this.KodeLabel);
@@ -127,6 +137,7 @@
         private System.Windows.Forms.Label BrugerLabel;
         private System.Windows.Forms.Label KodeLabel;
         private System.Windows.Forms.Button Login_Button;
+        private System.Windows.Forms.Label cridentials;
     }
 }
 
