@@ -23,10 +23,13 @@ namespace BookingSystem
 
 
                 //initial logic
-                string userTable = "create table Users (id integer primary key, Username string, Password string, Name string, IsAdmin bool)";
+                string userTable = "create table Users (id integer primary key, Username string, Password string, Name string, IsAdmin bool, WorkingDays integer, CleaningDays integer)";
                 SQLiteCommand commandOnCreate = new SQLiteCommand(userTable, dbConnOnCreate);
                 commandOnCreate.ExecuteNonQuery();
-                string user = "Insert into Users values(null, \"admin\", \"admin\", \"ADMINISTRATOR\", 1)";
+                string user = "Insert into Users values(null, \"admin\", \"admin\", \"ADMINISTRATOR\", 1, 0, 0)";
+                commandOnCreate = new SQLiteCommand(user, dbConnOnCreate);
+                commandOnCreate.ExecuteNonQuery();
+                user = "Insert into Users values(null, \"poul\", \"poul\", \"Poul Erik Mågensen\", 0, 0, 0)";
                 commandOnCreate = new SQLiteCommand(user, dbConnOnCreate);
                 commandOnCreate.ExecuteNonQuery();
                 string workTable = "create table Tasks (id integer primary key, day integer, month integer, year integer, assignee integer, type bool )";
