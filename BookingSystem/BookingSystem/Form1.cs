@@ -31,10 +31,12 @@ namespace BookingSystem
             if (isAdmin && loggedIn)
             {
                 AdminCalendar.Show();
+                userManBtn.Show();
             }
             else
             {
                 AdminCalendar.Hide();
+                userManBtn.Hide();
             }
         }
 
@@ -119,6 +121,13 @@ namespace BookingSystem
         private void BrugerLabel_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void userManBtn_Click(object sender, EventArgs e)
+        {
+            UserManagerForm userMan = new UserManagerForm();
+
+            userMan.Show();
         }
     }
 }
