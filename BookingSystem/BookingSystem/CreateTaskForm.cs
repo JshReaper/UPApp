@@ -69,12 +69,23 @@ namespace BookingSystem
 
         private void CleaningBtn_Click(object sender, EventArgs e)
         {
-            Close();
+            //set in if statement
+            ErrorForm error = new ErrorForm("Opgave allerede tildelt til den valgte dato");
+            error.ShowDialog();
+
+            //add tasks to the database
+          //  Close();
         }
 
         private void WorkBtn_Click(object sender, EventArgs e)
         {
-            Close();
+            //set in if statement
+            ErrorForm error = new ErrorForm("Opgave allerede tildelt til den valgte dato");
+            error.ShowDialog();
+
+
+            //add task to the databse
+         //   Close();
         }
     }
 }

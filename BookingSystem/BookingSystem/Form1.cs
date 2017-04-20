@@ -15,6 +15,7 @@ namespace BookingSystem
         static int userID = 0;
         bool loggedIn;
         bool isAdmin;
+
         public Form1()
         {
             InitializeComponent();
@@ -77,7 +78,8 @@ namespace BookingSystem
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            taskForm.Show();
+            
+                taskForm.ShowDialog();
         }
 
 
