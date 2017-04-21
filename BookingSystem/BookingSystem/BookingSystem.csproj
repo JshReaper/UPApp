@@ -74,6 +74,12 @@
     <Compile Include="CreateTaskForm.Designer.cs">
       <DependentUpon>CreateTaskForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CreateUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateUserForm.Designer.cs">
+      <DependentUpon>CreateUserForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ErrorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +102,9 @@
     </Compile>
     <EmbeddedResource Include="CreateTaskForm.resx">
       <DependentUpon>CreateTaskForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateUserForm.resx">
+      <DependentUpon>CreateUserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ErrorForm.resx">
       <DependentUpon>ErrorForm.cs</DependentUpon>

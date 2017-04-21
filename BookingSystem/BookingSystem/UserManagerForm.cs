@@ -78,23 +78,37 @@ namespace BookingSystem
 
         private void deleteBtn_Click(object sender, EventArgs e)
         {
-            SQLiteConnection dbConn = new SQLiteConnection("data source = Data.db;Version=3;");
+            SQLiteConnection dbConn = new SQLiteConnection("Data Source=Data.db;Version=3;");
             dbConn.Open();
-            string Query = "delete from Users where Name = \"Poul Erik Mågensen\";";
 
-            SQLiteCommand deleteCommand = new SQLiteCommand(Query, dbConn);
+
+            string deleteUser = "delete from Users where Name= '" + userList.SelectedItem + "' ;";
+            SQLiteCommand deleteCommand = new SQLiteCommand(deleteUser, dbConn);
+            SQLiteDataReader dr;
 
             try
             {
-                deleteCommand.ExecuteNonQuery();
-
+                dr = deleteCommand.ExecuteReader();
+                MessageBox.Show("Brugeren er nu slettet.");
+                while (dr.Read())
+                {
+                    userList.Items.Remove(userList.SelectedItem);
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                Debug.WriteLine("No possible way to delete user when non is chosen or exist.");
+                MessageBox.Show(ex.Message);
             }
             dbConn.Close();
-            
+
+        }
+
+        private void newUser_Click(object sender, EventArgs e)
+        {
+            CreateUserForm userForm = new CreateUserForm();
+
+
+            userForm.Show();
         }
     }
 }

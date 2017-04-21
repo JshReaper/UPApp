@@ -31,6 +31,7 @@
             this.userList = new System.Windows.Forms.ListBox();
             this.infoBox = new System.Windows.Forms.TextBox();
             this.deleteBtn = new System.Windows.Forms.Button();
+            this.newUser = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // userList
@@ -55,17 +56,28 @@
             // 
             this.deleteBtn.Location = new System.Drawing.Point(225, 313);
             this.deleteBtn.Name = "deleteBtn";
-            this.deleteBtn.Size = new System.Drawing.Size(93, 23);
+            this.deleteBtn.Size = new System.Drawing.Size(93, 38);
             this.deleteBtn.TabIndex = 2;
             this.deleteBtn.Text = "Slet";
             this.deleteBtn.UseVisualStyleBackColor = true;
             this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
+            // 
+            // newUser
+            // 
+            this.newUser.Location = new System.Drawing.Point(26, 312);
+            this.newUser.Name = "newUser";
+            this.newUser.Size = new System.Drawing.Size(137, 39);
+            this.newUser.TabIndex = 3;
+            this.newUser.Text = "Ny Bruger";
+            this.newUser.UseVisualStyleBackColor = true;
+            this.newUser.Click += new System.EventHandler(this.newUser_Click);
             // 
             // UserManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(429, 363);
+            this.Controls.Add(this.newUser);
             this.Controls.Add(this.deleteBtn);
             this.Controls.Add(this.infoBox);
             this.Controls.Add(this.userList);
@@ -81,5 +93,6 @@
         private System.Windows.Forms.ListBox userList;
         private System.Windows.Forms.TextBox infoBox;
         private System.Windows.Forms.Button deleteBtn;
+        private System.Windows.Forms.Button newUser;
     }
 }
