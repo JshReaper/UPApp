@@ -54,6 +54,7 @@ namespace BookingSystem
                 MessageBox.Show(ex.Message);
             }
             dbConn.Close();
+            dbConn.Dispose();
         }
     }
 }

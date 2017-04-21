@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.IO;
 using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace BookingSystem
 {
@@ -39,6 +40,8 @@ namespace BookingSystem
 
                 //end logic
                 dbConnOnCreate.Close();
+                dbConnOnCreate.Dispose();
+                commandOnCreate.Dispose();
 
             }
         }
@@ -66,18 +69,31 @@ namespace BookingSystem
                 if (dr.GetString(1) != Username)
                 {
                     dbCon.Close();
+
+                    dbCon.Dispose();
+
+                    dr.Dispose();
+                    dbCom.Dispose();
                     Debug.WriteLine("User was not found");
                     return false;
                 }
                 if (dr.GetString(1) == Username && dr.GetString(2) == Password)
                 {
                     dbCon.Close();
+                    dbCon.Dispose();
+
+                    dr.Dispose();
+                    dbCom.Dispose();
                     Debug.WriteLine("User is now loggedin");
                     return true;
                 }
             }
             //end logic
             dbCon.Close();
+
+            dbCon.Dispose();
+            dr.Dispose();
+            dbCom.Dispose();
             Debug.WriteLine("Logic has failed");
             return false;
         }
@@ -101,6 +117,9 @@ namespace BookingSystem
             //end logic
             int toReturn = dr.GetInt32(0);
             dbCon.Close();
+            dbCon.Dispose();
+            dr.Dispose();
+            dbCom.Dispose();
             return toReturn;
         }
 
@@ -132,6 +151,7 @@ namespace BookingSystem
             try
             {
                 dbCom.ExecuteNonQuery();
+                dbCom.Dispose();
             }
             catch
             {
@@ -158,6 +178,7 @@ namespace BookingSystem
             try
             {
                 dbCom.ExecuteNonQuery();
+                dbCom.Dispose();
             }
             catch
             {
@@ -167,6 +188,47 @@ namespace BookingSystem
             //end logic
             dbCon.Close();
             Debug.WriteLine("Database close");
+        }
+
+        public static void DeleteUser(int id)
+        {
+            string deleteUser = "delete from Users where ID= '" + id + "';";
+            using (SQLiteConnection c = new SQLiteConnection("Data Source=Data.db;Version=3;"))
+            {
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(deleteUser, c))
+                {
+                    cmd.ExecuteNonQuery();
+                    cmd.Dispose();
+                }
+
+                c.Close();
+            }
+        }
+
+        public static void SelectUser(ref string user, ref int id, ref TextBox infoBox)
+        {
+            string Query = "select * from Users where name = '" + user + "' ;";
+            using (SQLiteConnection c = new SQLiteConnection("data source = Data.db;Version=3;"))
+            {
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(Query, c))
+                {
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        while (rdr.Read())
+                        {
+                            string nameString = rdr.GetString(rdr.GetOrdinal("Name"));
+                            string userNameString = rdr.GetString(rdr.GetOrdinal("Username"));
+                            id = rdr.GetInt32(rdr.GetOrdinal("ID"));
+                            infoBox.Text = "Name: " + nameString + "\n" + "User name: " + userNameString;
+                        }
+                        cmd.Dispose();
+                        rdr.Dispose();
+                    }
+                }
+                c.Close();
+            }
         }
     }
 }

@@ -45,61 +45,71 @@ namespace BookingSystem
 
             }
             dbConn.Close();
+            dbConn.Dispose();
         }
 
         private void userList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SQLiteConnection dbConn = new SQLiteConnection("data source = Data.db;Version=3;");
-            dbConn.Open();
-            string Query = "select * from Users where name = '" + userList.Text + "' ;";
-            SQLiteCommand showCommand = new SQLiteCommand(Query, dbConn);
+            string user = userList.Text;
+            DatabaseManager.SelectUser(ref user,ref id,ref infoBox);
+            //SQLiteConnection dbConn = new SQLiteConnection("data source = Data.db;Version=3;");
+            //dbConn.Open();
+            //SQLiteCommand showCommand = new SQLiteCommand(Query, dbConn);
 
-            SQLiteDataReader dr;
+            //SQLiteDataReader dr;
 
 
-            try
-            {
-                dr = showCommand.ExecuteReader();
+            //try
+            //{
+            //    dr = showCommand.ExecuteReader();
 
-                while (dr.Read())
-                {
-                    string nameString = dr.GetString(dr.GetOrdinal("Name"));
-                    string userNameString = dr.GetString(dr.GetOrdinal("Username"));
-
-                    infoBox.Text = "Name: " + nameString + "\nUser name: " + userNameString;
-                }
-            }
-            catch
-            {
+            //    while (dr.Read())
+            //    {
+            //        string nameString = dr.GetString(dr.GetOrdinal("Name"));
+            //        string userNameString = dr.GetString(dr.GetOrdinal("Username"));
+            //        id = dr.GetInt32(dr.GetOrdinal("ID"));
+            //        infoBox.Text = "Name: " + nameString + "\nUser name: " + userNameString;
+            //    }
+            //}
+            //catch
+            //{
                 
-            }
-            dbConn.Close();
+            //}
+            //dbConn.Close();
         }
 
+        private int id;
         private void deleteBtn_Click(object sender, EventArgs e)
         {
-            SQLiteConnection dbConn = new SQLiteConnection("Data Source=Data.db;Version=3;");
-            dbConn.Open();
-
-
-            string deleteUser = "delete from Users where Name= '" + userList.SelectedItem + "' ;";
-            SQLiteCommand deleteCommand = new SQLiteCommand(deleteUser, dbConn);
-            SQLiteDataReader dr;
 
             try
             {
-                dr = deleteCommand.ExecuteReader();
-                MessageBox.Show("Brugeren er nu slettet.");
-                while (dr.Read())
-                {
-                    userList.Items.Remove(userList.SelectedItem);
-                }
+                DatabaseManager.DeleteUser(id);
+                
+                userList.Items.Remove(userList.SelectedItem);
             }
+
+            //SQLiteConnection dbConn = new SQLiteConnection("Data Source=Data.db;Version=3;");
+            //dbConn.Open();
+
+
+            //SQLiteCommand deleteCommand = new SQLiteCommand(deleteUser, dbConn);
+            //SQLiteDataReader dr;
+
+            //try
+            //{
+            //    dr = deleteCommand.ExecuteReader();
+            //    MessageBox.Show("Brugeren er nu slettet.");
+            //    while (dr.Read())
+            //    {
+            //        userList.Items.Remove(userList.SelectedItem);
+            //    }
+            //}
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            dbConn.Close();
+            //dbConn.Close();
 
         }
 
