@@ -228,6 +228,7 @@ namespace BookingSystem
                     }
                 }
                 c.Close();
+                c.Dispose();
             }
         }
     }
