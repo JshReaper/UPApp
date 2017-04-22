@@ -13,6 +13,7 @@ namespace BookingSystem
 {
     public partial class CreateUserForm : Form
     {
+        UserManagerForm userMan = new UserManagerForm();
         public CreateUserForm()
         {
             InitializeComponent();
@@ -31,11 +32,11 @@ namespace BookingSystem
             {
                 chooseAdmin = "0";
             }
-            else if(yesCheck.Checked && noCheck.Checked)
+            else if (yesCheck.Checked && noCheck.Checked)
             {
                 MessageBox.Show("Vælg venligst kun en boks.");
             }
-            
+
             string user = "Insert into Users values(null, '" + userName_txt.Text + "', '" + password_txt.Text + "', '" + name_txt.Text + "', '" + chooseAdmin + "', 0, 0)";
             SQLiteCommand saveCommand = new SQLiteCommand(user, dbConn);
             SQLiteDataReader dr;
@@ -46,7 +47,7 @@ namespace BookingSystem
                 MessageBox.Show("Brugeren er nu gemt.");
                 while (dr.Read())
                 {
-
+                    
                 }
             }
             catch (Exception ex)
