@@ -40,7 +40,7 @@
             this.userList.ItemHeight = 16;
             this.userList.Location = new System.Drawing.Point(26, 30);
             this.userList.Name = "userList";
-            this.userList.Size = new System.Drawing.Size(137, 276);
+            this.userList.Size = new System.Drawing.Size(166, 276);
             this.userList.TabIndex = 0;
             this.userList.SelectedIndexChanged += new System.EventHandler(this.userList_SelectedIndexChanged);
             // 
@@ -49,7 +49,7 @@
             this.infoBox.Location = new System.Drawing.Point(225, 30);
             this.infoBox.Multiline = true;
             this.infoBox.Name = "infoBox";
-            this.infoBox.Size = new System.Drawing.Size(144, 276);
+            this.infoBox.Size = new System.Drawing.Size(175, 276);
             this.infoBox.TabIndex = 1;
             // 
             // deleteBtn

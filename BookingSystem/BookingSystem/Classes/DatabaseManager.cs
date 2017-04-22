@@ -220,8 +220,10 @@ namespace BookingSystem
                         {
                             string nameString = rdr.GetString(rdr.GetOrdinal("Name"));
                             string userNameString = rdr.GetString(rdr.GetOrdinal("Username"));
+                            string workingDaysString = rdr.GetInt32(rdr.GetOrdinal("WorkingDays")).ToString();
+                            string cleaningDaysString = rdr.GetInt32(rdr.GetOrdinal("CleaningDays")).ToString();
                             id = rdr.GetInt32(rdr.GetOrdinal("ID"));
-                            infoBox.Text = "Name: " + nameString + "\n" + "User name: " + userNameString;
+                            infoBox.Text = "Navn: " + nameString + "\n" + "Brugernavn: " + userNameString + "\n" + "Arbejdsdage: " + workingDaysString + "\n" + "Rengøringsdage: " + cleaningDaysString;
                         }
                         cmd.Dispose();
                         rdr.Dispose();
