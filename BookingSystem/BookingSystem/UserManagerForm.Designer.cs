@@ -49,6 +49,7 @@
             this.infoBox.Location = new System.Drawing.Point(225, 30);
             this.infoBox.Multiline = true;
             this.infoBox.Name = "infoBox";
+            this.infoBox.ReadOnly = true;
             this.infoBox.Size = new System.Drawing.Size(175, 276);
             this.infoBox.TabIndex = 1;
             // 
