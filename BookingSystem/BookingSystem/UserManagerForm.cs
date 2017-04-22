@@ -84,7 +84,7 @@ namespace BookingSystem
 
             try
             {
-                DatabaseManager.DeleteUser(id);
+                DatabaseManager.DeleteUser(id, ref infoBox);
                 
                 userList.Items.Remove(userList.SelectedItem);
             }

@@ -190,7 +190,7 @@ namespace BookingSystem
             Debug.WriteLine("Database close");
         }
 
-        public static void DeleteUser(int id)
+        public static void DeleteUser(int id, ref TextBox infoBox)
         {
             string deleteUser = "delete from Users where ID= '" + id + "';";
             using (SQLiteConnection c = new SQLiteConnection("Data Source=Data.db;Version=3;"))
@@ -201,7 +201,7 @@ namespace BookingSystem
                     cmd.ExecuteNonQuery();
                     cmd.Dispose();
                 }
-
+                infoBox.Clear();
                 c.Close();
             }
         }
