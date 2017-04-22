@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.IO;
 using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace BookingSystem
 {
-    static class DatabaseManager
+    public static class DatabaseManager
     {
 
         public static void GenerateDataBase()
@@ -23,19 +24,24 @@ namespace BookingSystem
 
 
                 //initial logic
-                string userTable = "create table Users (id integer primary key, Username string, Password string, Name string, IsAdmin bool)";
+                string userTable = "create table Users (id integer primary key, Username string, Password string, Name string, IsAdmin bool, WorkingDays integer, CleaningDays integer)";
                 SQLiteCommand commandOnCreate = new SQLiteCommand(userTable, dbConnOnCreate);
                 commandOnCreate.ExecuteNonQuery();
-                string user = "Insert into Users values(null, \"admin\", \"admin\", \"ADMINISTRATOR\", 1)";
+                string user = "Insert into Users values(null, \"admin\", \"admin\", \"ADMINISTRATOR\", 1, 0, 0)";
                 commandOnCreate = new SQLiteCommand(user, dbConnOnCreate);
                 commandOnCreate.ExecuteNonQuery();
-                string workTable = "create table Tasks (id integer primary key, day integer, month integer, year integer, assignee integer, type bool, start string, end string )";
+                user = "Insert into Users values(null, \"poul\", \"poul\", \"Poul Erik Mågensen\", 0, 0, 0)";
+                commandOnCreate = new SQLiteCommand(user, dbConnOnCreate);
+                commandOnCreate.ExecuteNonQuery();
+                string workTable = "create table Tasks (id integer primary key, day integer, month integer, year integer, assignee integer, type bool )";
                 commandOnCreate = new SQLiteCommand(workTable, dbConnOnCreate);
                 commandOnCreate.ExecuteNonQuery();
 
 
                 //end logic
                 dbConnOnCreate.Close();
+                dbConnOnCreate.Dispose();
+                commandOnCreate.Dispose();
 
             }
         }
@@ -63,18 +69,31 @@ namespace BookingSystem
                 if (dr.GetString(1) != Username)
                 {
                     dbCon.Close();
+
+                    dbCon.Dispose();
+
+                    dr.Dispose();
+                    dbCom.Dispose();
                     Debug.WriteLine("User was not found");
                     return false;
                 }
                 if (dr.GetString(1) == Username && dr.GetString(2) == Password)
                 {
                     dbCon.Close();
-                    Debug.WriteLine("User is now logged in");
+                    dbCon.Dispose();
+
+                    dr.Dispose();
+                    dbCom.Dispose();
+                    Debug.WriteLine("User is now loggedin");
                     return true;
                 }
             }
             //end logic
             dbCon.Close();
+
+            dbCon.Dispose();
+            dr.Dispose();
+            dbCom.Dispose();
             Debug.WriteLine("Logic has failed");
             return false;
         }
@@ -98,6 +117,9 @@ namespace BookingSystem
             //end logic
             int toReturn = dr.GetInt32(0);
             dbCon.Close();
+            dbCon.Dispose();
+            dr.Dispose();
+            dbCom.Dispose();
             return toReturn;
         }
 
@@ -108,7 +130,7 @@ namespace BookingSystem
         /// <param name="month"></param>
         /// <param name="year"></param>
         /// <param name="cleaning"></param>
-        public static void CreateTask(int day, int month, int year, bool cleaning, string start, string end)
+        public static void CreateTask(int day, int month, int year, bool cleaning)
         {
             int clean;
             if (cleaning)
@@ -120,7 +142,7 @@ namespace BookingSystem
                 clean = 0;
             }
 
-            string add = string.Format("insert into Tasks values(null,{0},{1},{2},0,{3},{4},{5} )", day, month, year, clean,start,end);
+            string add = string.Format("insert into Tasks values(null,{0},{1},{2},0,{3} )", day, month, year, clean);
             SQLiteConnection dbCon = new SQLiteConnection("Data Source=Data.db;Version=3;");
             SQLiteCommand dbCom = new SQLiteCommand(add, dbCon);
             dbCon.Open();
@@ -129,6 +151,7 @@ namespace BookingSystem
             try
             {
                 dbCom.ExecuteNonQuery();
+                dbCom.Dispose();
             }
             catch
             {
@@ -155,6 +178,7 @@ namespace BookingSystem
             try
             {
                 dbCom.ExecuteNonQuery();
+                dbCom.Dispose();
             }
             catch
             {
@@ -164,6 +188,50 @@ namespace BookingSystem
             //end logic
             dbCon.Close();
             Debug.WriteLine("Database close");
+        }
+
+        public static void DeleteUser(int id, ref TextBox infoBox)
+        {
+            string deleteUser = "delete from Users where ID= '" + id + "';";
+            using (SQLiteConnection c = new SQLiteConnection("Data Source=Data.db;Version=3;"))
+            {
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(deleteUser, c))
+                {
+                    cmd.ExecuteNonQuery();
+                    cmd.Dispose();
+                }
+                infoBox.Clear();
+                c.Close();
+            }
+        }
+
+        public static void SelectUser(ref string user, ref int id, ref TextBox infoBox)
+        {
+            string Query = "select * from Users where name = '" + user + "' ;";
+            using (SQLiteConnection c = new SQLiteConnection("data source = Data.db;Version=3;"))
+            {
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(Query, c))
+                {
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        while (rdr.Read())
+                        {
+                            string nameString = rdr.GetString(rdr.GetOrdinal("Name"));
+                            string userNameString = rdr.GetString(rdr.GetOrdinal("Username"));
+                            string workingDaysString = rdr.GetInt32(rdr.GetOrdinal("WorkingDays")).ToString();
+                            string cleaningDaysString = rdr.GetInt32(rdr.GetOrdinal("CleaningDays")).ToString();
+                            id = rdr.GetInt32(rdr.GetOrdinal("ID"));
+                            infoBox.Text = "Navn: " + nameString + "\n" + "Brugernavn: " + userNameString + "\n" + "Arbejdsdage: " + workingDaysString + "\n" + "Rengøringsdage: " + cleaningDaysString;
+                        }
+                        cmd.Dispose();
+                        rdr.Dispose();
+                    }
+                }
+                c.Close();
+                c.Dispose();
+            }
         }
     }
 }

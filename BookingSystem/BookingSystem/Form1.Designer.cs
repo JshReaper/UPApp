@@ -36,6 +36,8 @@
             this.Login_Button = new System.Windows.Forms.Button();
             this.AdminCalendar = new System.Windows.Forms.MonthCalendar();
             this.Loop = new System.Windows.Forms.Timer(this.components);
+            this.cridentials = new System.Windows.Forms.Label();
+            this.userManBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // UsernameBox
@@ -98,11 +100,33 @@
             this.Loop.Interval = 40;
             this.Loop.Tick += new System.EventHandler(this.Loop_Tick);
             // 
+            // cridentials
+            // 
+            this.cridentials.AutoSize = true;
+            this.cridentials.Location = new System.Drawing.Point(68, 18);
+            this.cridentials.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.cridentials.Name = "cridentials";
+            this.cridentials.Size = new System.Drawing.Size(0, 13);
+            this.cridentials.TabIndex = 5;
+            // 
+            // userManBtn
+            // 
+            this.userManBtn.Location = new System.Drawing.Point(51, 215);
+            this.userManBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.userManBtn.Name = "userManBtn";
+            this.userManBtn.Size = new System.Drawing.Size(149, 30);
+            this.userManBtn.TabIndex = 5;
+            this.userManBtn.Text = "Brugerhåndtering";
+            this.userManBtn.UseVisualStyleBackColor = true;
+            this.userManBtn.Click += new System.EventHandler(this.userManBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(309, 255);
+            this.ClientSize = new System.Drawing.Size(315, 255);
+            this.Controls.Add(this.userManBtn);
+            this.Controls.Add(this.cridentials);
             this.Controls.Add(this.AdminCalendar);
             this.Controls.Add(this.Login_Button);
             this.Controls.Add(this.KodeLabel);
@@ -127,6 +151,8 @@
         private System.Windows.Forms.Label BrugerLabel;
         private System.Windows.Forms.Label KodeLabel;
         private System.Windows.Forms.Button Login_Button;
+        private System.Windows.Forms.Label cridentials;
+        private System.Windows.Forms.Button userManBtn;
     }
 }
 
