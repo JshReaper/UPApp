@@ -33,7 +33,7 @@ namespace BookingSystem
                 user = "Insert into Users values(null, \"poul\", \"poul\", \"Poul Erik Mågensen\", 0, 0, 0)";
                 commandOnCreate = new SQLiteCommand(user, dbConnOnCreate);
                 commandOnCreate.ExecuteNonQuery();
-                string workTable = "create table Tasks (id integer primary key, day integer, month integer, year integer, assignee integer, type bool )";
+                string workTable = "create table Tasks (id integer primary key, day integer, month integer, year integer, assignee integer, type bool, start string, end string )";
                 commandOnCreate = new SQLiteCommand(workTable, dbConnOnCreate);
                 commandOnCreate.ExecuteNonQuery();
 
@@ -130,7 +130,7 @@ namespace BookingSystem
         /// <param name="month"></param>
         /// <param name="year"></param>
         /// <param name="cleaning"></param>
-        public static void CreateTask(int day, int month, int year, bool cleaning)
+        public static void CreateTask(int day, int month, int year, bool cleaning, string start, string end)
         {
             int clean;
             if (cleaning)
@@ -142,7 +142,7 @@ namespace BookingSystem
                 clean = 0;
             }
 
-            string add = string.Format("insert into Tasks values(null,{0},{1},{2},0,{3} )", day, month, year, clean);
+            string add = string.Format("insert into Tasks values(null,{0},{1},{2},0,{3},{4},{5} )", day, month, year, clean, start, end);
             SQLiteConnection dbCon = new SQLiteConnection("Data Source=Data.db;Version=3;");
             SQLiteCommand dbCom = new SQLiteCommand(add, dbCon);
             dbCon.Open();
