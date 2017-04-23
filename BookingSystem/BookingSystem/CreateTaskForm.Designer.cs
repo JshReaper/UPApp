@@ -34,15 +34,18 @@
             this.CleaningBtn = new System.Windows.Forms.Button();
             this.WorkBtn = new System.Windows.Forms.Button();
             this.Tidspunkt = new System.Windows.Forms.TextBox();
+            this.StartcomboBox = new System.Windows.Forms.ComboBox();
+            this.SlutcomboBox = new System.Windows.Forms.ComboBox();
+            this.StartLabel = new System.Windows.Forms.Label();
+            this.SlutLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // MonthAndDay
             // 
             this.MonthAndDay.AutoSize = true;
-            this.MonthAndDay.Location = new System.Drawing.Point(25, 16);
-            this.MonthAndDay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.MonthAndDay.Location = new System.Drawing.Point(19, 13);
             this.MonthAndDay.Name = "MonthAndDay";
-            this.MonthAndDay.Size = new System.Drawing.Size(97, 17);
+            this.MonthAndDay.Size = new System.Drawing.Size(75, 13);
             this.MonthAndDay.TabIndex = 0;
             this.MonthAndDay.Text = "MonthAndDay";
             this.MonthAndDay.Click += new System.EventHandler(this.MonthAndDay_Click);
@@ -50,29 +53,26 @@
             // DayOfWeek
             // 
             this.DayOfWeek.AutoSize = true;
-            this.DayOfWeek.Location = new System.Drawing.Point(25, 33);
-            this.DayOfWeek.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.DayOfWeek.Location = new System.Drawing.Point(19, 27);
             this.DayOfWeek.Name = "DayOfWeek";
-            this.DayOfWeek.Size = new System.Drawing.Size(84, 17);
+            this.DayOfWeek.Size = new System.Drawing.Size(66, 13);
             this.DayOfWeek.TabIndex = 1;
             this.DayOfWeek.Text = "DayOfWeek";
             // 
             // TidLabel
             // 
             this.TidLabel.AutoSize = true;
-            this.TidLabel.Location = new System.Drawing.Point(25, 96);
-            this.TidLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.TidLabel.Location = new System.Drawing.Point(19, 78);
             this.TidLabel.Name = "TidLabel";
-            this.TidLabel.Size = new System.Drawing.Size(28, 17);
+            this.TidLabel.Size = new System.Drawing.Size(22, 13);
             this.TidLabel.TabIndex = 2;
             this.TidLabel.Text = "Tid";
             // 
             // CleaningBtn
             // 
-            this.CleaningBtn.Location = new System.Drawing.Point(56, 251);
-            this.CleaningBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.CleaningBtn.Location = new System.Drawing.Point(42, 204);
             this.CleaningBtn.Name = "CleaningBtn";
-            this.CleaningBtn.Size = new System.Drawing.Size(100, 28);
+            this.CleaningBtn.Size = new System.Drawing.Size(75, 23);
             this.CleaningBtn.TabIndex = 3;
             this.CleaningBtn.Text = "Rengøring";
             this.CleaningBtn.UseVisualStyleBackColor = true;
@@ -80,10 +80,9 @@
             // 
             // WorkBtn
             // 
-            this.WorkBtn.Location = new System.Drawing.Point(219, 250);
-            this.WorkBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.WorkBtn.Location = new System.Drawing.Point(164, 203);
             this.WorkBtn.Name = "WorkBtn";
-            this.WorkBtn.Size = new System.Drawing.Size(100, 28);
+            this.WorkBtn.Size = new System.Drawing.Size(75, 23);
             this.WorkBtn.TabIndex = 4;
             this.WorkBtn.Text = "Arbejde";
             this.WorkBtn.UseVisualStyleBackColor = true;
@@ -91,25 +90,93 @@
             // 
             // Tidspunkt
             // 
-            this.Tidspunkt.Location = new System.Drawing.Point(28, 128);
+            this.Tidspunkt.Location = new System.Drawing.Point(164, 6);
+            this.Tidspunkt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Tidspunkt.MaxLength = 11;
             this.Tidspunkt.Name = "Tidspunkt";
-            this.Tidspunkt.Size = new System.Drawing.Size(291, 22);
+            this.Tidspunkt.Size = new System.Drawing.Size(219, 20);
             this.Tidspunkt.TabIndex = 5;
             this.Tidspunkt.TextChanged += new System.EventHandler(this.Tidspunkt_TextChanged);
             // 
+            // StartcomboBox
+            // 
+            this.StartcomboBox.FormattingEnabled = true;
+            this.StartcomboBox.Items.AddRange(new object[] {
+            "06:00",
+            "07:00",
+            "08:00",
+            "09:00",
+            "10:00",
+            "11:00",
+            "12:00",
+            "13:00",
+            "14:00",
+            "15:00",
+            "16:00",
+            "17:00",
+            "18:00",
+            "19:00"});
+            this.StartcomboBox.Location = new System.Drawing.Point(75, 98);
+            this.StartcomboBox.Name = "StartcomboBox";
+            this.StartcomboBox.Size = new System.Drawing.Size(121, 21);
+            this.StartcomboBox.TabIndex = 6;
+            // 
+            // SlutcomboBox
+            // 
+            this.SlutcomboBox.FormattingEnabled = true;
+            this.SlutcomboBox.Items.AddRange(new object[] {
+            "07:00",
+            "08:00",
+            "09:00",
+            "10:00",
+            "11:00",
+            "12:00",
+            "13:00",
+            "14:00",
+            "15:00",
+            "16:00",
+            "17:00",
+            "18:00",
+            "19:00",
+            "20:00"});
+            this.SlutcomboBox.Location = new System.Drawing.Point(75, 125);
+            this.SlutcomboBox.Name = "SlutcomboBox";
+            this.SlutcomboBox.Size = new System.Drawing.Size(121, 21);
+            this.SlutcomboBox.TabIndex = 7;
+            // 
+            // StartLabel
+            // 
+            this.StartLabel.AutoSize = true;
+            this.StartLabel.Location = new System.Drawing.Point(12, 101);
+            this.StartLabel.Name = "StartLabel";
+            this.StartLabel.Size = new System.Drawing.Size(29, 13);
+            this.StartLabel.TabIndex = 8;
+            this.StartLabel.Text = "Start";
+            // 
+            // SlutLabel
+            // 
+            this.SlutLabel.AutoSize = true;
+            this.SlutLabel.Location = new System.Drawing.Point(16, 128);
+            this.SlutLabel.Name = "SlutLabel";
+            this.SlutLabel.Size = new System.Drawing.Size(25, 13);
+            this.SlutLabel.TabIndex = 9;
+            this.SlutLabel.Text = "Slut";
+            // 
             // CreateTaskForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(379, 321);
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.SlutLabel);
+            this.Controls.Add(this.StartLabel);
+            this.Controls.Add(this.SlutcomboBox);
+            this.Controls.Add(this.StartcomboBox);
             this.Controls.Add(this.Tidspunkt);
             this.Controls.Add(this.WorkBtn);
             this.Controls.Add(this.CleaningBtn);
             this.Controls.Add(this.TidLabel);
             this.Controls.Add(this.DayOfWeek);
             this.Controls.Add(this.MonthAndDay);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "CreateTaskForm";
             this.Text = "CreateTaskForm";
             this.Load += new System.EventHandler(this.CreateTaskForm_Load);
@@ -126,5 +193,9 @@
         private System.Windows.Forms.Button CleaningBtn;
         private System.Windows.Forms.Button WorkBtn;
         private System.Windows.Forms.TextBox Tidspunkt;
+        private System.Windows.Forms.ComboBox StartcomboBox;
+        private System.Windows.Forms.ComboBox SlutcomboBox;
+        private System.Windows.Forms.Label StartLabel;
+        private System.Windows.Forms.Label SlutLabel;
     }
 }

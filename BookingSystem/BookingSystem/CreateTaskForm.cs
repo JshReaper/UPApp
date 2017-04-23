@@ -75,52 +75,94 @@ namespace BookingSystem
         private void CleaningBtn_Click(object sender, EventArgs e)
         {
             //set in if statement
-            ErrorForm error = new ErrorForm("Der opstod en fejl.");
-            //error = new ErrorForm("Opgave allerede tildelt til den valgte dato");
-            stringIsGood = testString(startString);
-            if (stringIsGood == false)
+            ErrorForm error;
+            string start ="";
+            string slut="";
+            if (StartcomboBox.SelectedItem != null)
             {
-                error = new ErrorForm("Opgavens tidspunkt er ikke korrekt indtastet");
+                start = StartcomboBox.SelectedItem.ToString();
+            }
+            if (SlutcomboBox.SelectedItem != null)
+            {
+                slut = SlutcomboBox.SelectedItem.ToString();
+            }
+            if(start != "" && slut != "")
+            { 
+                DatabaseManager.CreateTask(Day,Month,Year,true,start,slut);
+                error  = new ErrorForm("opgave oprettet");
                 error.ShowDialog();
-                error = new ErrorForm("Der opstod en fejl.");
             }
-            if (stringIsGood == true)
+            else
             {
-                splitString = startString.Split('-');
-                endStringOne = splitString[0];
-                endStringTwo = splitString[1];
-                DatabaseManager.CreateTask(Day, Month, Year, true, endStringOne, endStringTwo);
-                startString = "empty";
-                splitString = null;
-                endStringOne = "empty";
-                endStringTwo = "empty";
-                Close();
+                error = new ErrorForm("Vælg venligst et tidspunkt i start og slut felt");
+                error.ShowDialog();
             }
+            //error = new ErrorForm("Opgave allerede tildelt til den valgte dato");
+            //stringIsGood = testString(startString);
+            //if (stringIsGood == false)
+            //{
+            //    error = new ErrorForm("Opgavens tidspunkt er ikke korrekt indtastet");
+            //    error.ShowDialog();
+            //    error = new ErrorForm("Der opstod en fejl.");
+            //}
+            //if (stringIsGood == true)
+            //{
+            //    splitString = startString.Split('-');
+            //    endStringOne = splitString[0];
+            //    endStringTwo = splitString[1];
+            //    DatabaseManager.CreateTask(Day, Month, Year, true, endStringOne, endStringTwo);
+            //    startString = "empty";
+            //    splitString = null;
+            //    endStringOne = "empty";
+            //    endStringTwo = "empty";
+            //    Close();
+            //}
         }
 
         private void WorkBtn_Click(object sender, EventArgs e)
         {
             //set in if statement
             ErrorForm error = new ErrorForm("Der opstod en fejl.");
-            stringIsGood = testString(startString);
-            if (stringIsGood == false)
+            string start = "";
+            string slut = "";
+            if (StartcomboBox.SelectedItem != null)
             {
-                error = new ErrorForm("Opgavens tidspunkt er ikke korrekt indtastet");
+                start = StartcomboBox.SelectedItem.ToString();
+            }
+            if (SlutcomboBox.SelectedItem != null)
+            {
+                slut = SlutcomboBox.SelectedItem.ToString();
+            }
+            if (start != "" && slut != "")
+            {
+                DatabaseManager.CreateTask(Day, Month, Year, false, start, slut);
+                error = new ErrorForm("opgave oprettet");
                 error.ShowDialog();
-                error = new ErrorForm("Der opstod en fejl.");
             }
-            if (stringIsGood == true)
+            else
             {
-                splitString = startString.Split('-');
-                endStringOne = splitString[0];
-                endStringTwo = splitString[1];
-                DatabaseManager.CreateTask(Day, Month, Year, false, endStringOne, endStringTwo);
-                startString = "empty";
-                splitString = null;
-                endStringOne = "empty";
-                endStringTwo = "empty";
-                Close();
+                error = new ErrorForm("Vælg venligst et tidspunkt i start og slut felt");
+                error.ShowDialog();
             }
+            //stringIsGood = testString(startString);
+            //if (stringIsGood == false)
+            //{
+            //    error = new ErrorForm("Opgavens tidspunkt er ikke korrekt indtastet");
+            //    error.ShowDialog();
+            //    error = new ErrorForm("Der opstod en fejl.");
+            //}
+            //if (stringIsGood == true)
+            //{
+            //    splitString = startString.Split('-');
+            //    endStringOne = splitString[0];
+            //    endStringTwo = splitString[1];
+            //    DatabaseManager.CreateTask(Day, Month, Year, false, endStringOne, endStringTwo);
+            //    startString = "empty";
+            //    splitString = null;
+            //    endStringOne = "empty";
+            //    endStringTwo = "empty";
+            //    Close();
+            //}
         }
         public static bool testString(string s)
         {
