@@ -142,7 +142,7 @@ namespace BookingSystem
                 clean = 0;
             }
 
-            string add = string.Format("insert into Tasks values(null,{0},{1},{2},0,{3},{4},{5} )", day, month, year, clean, start, end);
+            string add = string.Format("insert into Tasks values(null,{0},{1},{2},0,{3},\"{4}\",\"{5}\")", day, month, year, clean, start, end);
             SQLiteConnection dbCon = new SQLiteConnection("Data Source=Data.db;Version=3;");
             SQLiteCommand dbCom = new SQLiteCommand(add, dbCon);
             dbCon.Open();
