@@ -33,7 +33,6 @@
             this.TidLabel = new System.Windows.Forms.Label();
             this.CleaningBtn = new System.Windows.Forms.Button();
             this.WorkBtn = new System.Windows.Forms.Button();
-            this.Tidspunkt = new System.Windows.Forms.TextBox();
             this.StartcomboBox = new System.Windows.Forms.ComboBox();
             this.SlutcomboBox = new System.Windows.Forms.ComboBox();
             this.StartLabel = new System.Windows.Forms.Label();
@@ -87,16 +86,6 @@
             this.WorkBtn.Text = "Arbejde";
             this.WorkBtn.UseVisualStyleBackColor = true;
             this.WorkBtn.Click += new System.EventHandler(this.WorkBtn_Click);
-            // 
-            // Tidspunkt
-            // 
-            this.Tidspunkt.Location = new System.Drawing.Point(164, 6);
-            this.Tidspunkt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.Tidspunkt.MaxLength = 11;
-            this.Tidspunkt.Name = "Tidspunkt";
-            this.Tidspunkt.Size = new System.Drawing.Size(219, 20);
-            this.Tidspunkt.TabIndex = 5;
-            this.Tidspunkt.TextChanged += new System.EventHandler(this.Tidspunkt_TextChanged);
             // 
             // StartcomboBox
             // 
@@ -171,7 +160,6 @@
             this.Controls.Add(this.StartLabel);
             this.Controls.Add(this.SlutcomboBox);
             this.Controls.Add(this.StartcomboBox);
-            this.Controls.Add(this.Tidspunkt);
             this.Controls.Add(this.WorkBtn);
             this.Controls.Add(this.CleaningBtn);
             this.Controls.Add(this.TidLabel);
@@ -192,7 +180,6 @@
         private System.Windows.Forms.Label TidLabel;
         private System.Windows.Forms.Button CleaningBtn;
         private System.Windows.Forms.Button WorkBtn;
-        private System.Windows.Forms.TextBox Tidspunkt;
         private System.Windows.Forms.ComboBox StartcomboBox;
         private System.Windows.Forms.ComboBox SlutcomboBox;
         private System.Windows.Forms.Label StartLabel;

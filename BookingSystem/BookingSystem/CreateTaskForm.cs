@@ -17,11 +17,7 @@ namespace BookingSystem
         public int Month { get; set; }
         public int Year { get; set; }
         private string _monthText;
-        bool stringIsGood = false;
-        string startString= "empty";
-        string[] splitString;
-        string endStringOne;
-        string endStringTwo;
+
         public CreateTaskForm()
         {
             InitializeComponent();
@@ -91,38 +87,20 @@ namespace BookingSystem
                 DatabaseManager.CreateTask(Day,Month,Year,true,start,slut);
                 error  = new ErrorForm("opgave oprettet");
                 error.ShowDialog();
+                Close();
             }
             else
             {
                 error = new ErrorForm("Vælg venligst et tidspunkt i start og slut felt");
                 error.ShowDialog();
             }
-            //error = new ErrorForm("Opgave allerede tildelt til den valgte dato");
-            //stringIsGood = testString(startString);
-            //if (stringIsGood == false)
-            //{
-            //    error = new ErrorForm("Opgavens tidspunkt er ikke korrekt indtastet");
-            //    error.ShowDialog();
-            //    error = new ErrorForm("Der opstod en fejl.");
-            //}
-            //if (stringIsGood == true)
-            //{
-            //    splitString = startString.Split('-');
-            //    endStringOne = splitString[0];
-            //    endStringTwo = splitString[1];
-            //    DatabaseManager.CreateTask(Day, Month, Year, true, endStringOne, endStringTwo);
-            //    startString = "empty";
-            //    splitString = null;
-            //    endStringOne = "empty";
-            //    endStringTwo = "empty";
-            //    Close();
-            //}
+           
         }
 
         private void WorkBtn_Click(object sender, EventArgs e)
         {
             //set in if statement
-            ErrorForm error = new ErrorForm("Der opstod en fejl.");
+            ErrorForm error;
             string start = "";
             string slut = "";
             if (StartcomboBox.SelectedItem != null)
@@ -138,94 +116,18 @@ namespace BookingSystem
                 DatabaseManager.CreateTask(Day, Month, Year, false, start, slut);
                 error = new ErrorForm("opgave oprettet");
                 error.ShowDialog();
+                Close();
             }
             else
             {
                 error = new ErrorForm("Vælg venligst et tidspunkt i start og slut felt");
                 error.ShowDialog();
             }
-            //stringIsGood = testString(startString);
-            //if (stringIsGood == false)
-            //{
-            //    error = new ErrorForm("Opgavens tidspunkt er ikke korrekt indtastet");
-            //    error.ShowDialog();
-            //    error = new ErrorForm("Der opstod en fejl.");
-            //}
-            //if (stringIsGood == true)
-            //{
-            //    splitString = startString.Split('-');
-            //    endStringOne = splitString[0];
-            //    endStringTwo = splitString[1];
-            //    DatabaseManager.CreateTask(Day, Month, Year, false, endStringOne, endStringTwo);
-            //    startString = "empty";
-            //    splitString = null;
-            //    endStringOne = "empty";
-            //    endStringTwo = "empty";
-            //    Close();
-            //}
-        }
-        public static bool testString(string s)
-        {
-            int dashes = 0;
-            int colons = 0;
-            //Count the dashes and colons in the string.
-            foreach (char c in s)
-            {
-                if (c == '-')
-                {
-                    dashes++;
-                }
-                if (c == ':')
-                {
-                    colons++;
-                }
-            }
-            //Confirms the string only contains numbers, colons and dashes.
-            foreach (char c in s)
-            {
-                if (!Char.IsDigit(c) && c != ':' && c != '-')
-                {
-                    return false;
-                }
-            }
-            //If the string contains nothing, return false.
-            if (s == "")
-            {
-                return false;
-            }
-            //If the string does not contain a dash, return false.
-            if (dashes != 1)
-            {
-                return false;
-            }
-            //If the string contains colons, confirm there's exactly 2 of them.
-            if (colons > 0)
-            {
-                if (colons != 2)
-                {
-                    return false;
-                }
-            }
-            //Check if the user has made a common typo.
-            if (s.Contains("::"))
-            {
-                return false;
-            }
-            return true;
+            
+           
         }
 
-        /*
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        */
-
-        private void Tidspunkt_TextChanged(object sender, EventArgs e)
-        {
-            startString = this.Tidspunkt.Text;
-        }
-
+        
         private void MonthAndDay_Click(object sender, EventArgs e)
         {
 
