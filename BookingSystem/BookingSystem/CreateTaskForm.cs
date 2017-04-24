@@ -74,27 +74,34 @@ namespace BookingSystem
             ErrorForm error;
             string start ="";
             string slut="";
+            int startTime = 0;
+            int endTime = 0;
             if (StartcomboBox.SelectedItem != null)
             {
                 start = StartcomboBox.SelectedItem.ToString();
+                startTime = Convert.ToInt32( start.Remove(2, 1));
             }
             if (SlutcomboBox.SelectedItem != null)
             {
                 slut = SlutcomboBox.SelectedItem.ToString();
+                endTime = Convert.ToInt32(slut.Remove(2, 1));
             }
-            if(start != "" && slut != "")
-            { 
-                DatabaseManager.CreateTask(Day,Month,Year,true,start,slut);
-                error  = new ErrorForm("opgave oprettet");
-                error.ShowDialog();
-                Close();
+            if (startTime < endTime)
+            {
+                if (start != "" && slut != "")
+                {
+                    DatabaseManager.CreateTask(Day, Month, Year, true, start, slut);
+                    error = new ErrorForm("opgave oprettet");
+                    error.ShowDialog();
+                    Close();
+                }
             }
             else
             {
-                error = new ErrorForm("Vælg venligst et tidspunkt i start og slut felt");
+                error = new ErrorForm("opgave blev ikke oprettet\n*Vælg venligst en dato\n*Slut tidspunkt skal være større end start tidspunkt");
                 error.ShowDialog();
             }
-           
+
         }
 
         private void WorkBtn_Click(object sender, EventArgs e)
