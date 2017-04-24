@@ -41,6 +41,8 @@ namespace BookingSystem
                 {
                     
                 }
+                UserManagerForm.FillList();
+                Close();
             }
             catch (Exception ex)
             {

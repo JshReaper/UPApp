@@ -19,9 +19,13 @@ namespace BookingSystem
             InitializeComponent();
             FillList();
         }
+        static ListBox box = new ListBox();
+        static bool listChanged;
 
-        public void FillList()
+        public static void FillList()
         {
+            box.Items.Clear();
+            listChanged = true;
             SQLiteConnection dbConn = new SQLiteConnection("data source = Data.db;Version=3;");
             dbConn.Open();
 
@@ -37,7 +41,7 @@ namespace BookingSystem
                 while (dr.Read())
                 {
                     string names = dr.GetString(dr.GetOrdinal("Name")).ToString();
-                    userList.Items.Add(names);
+                    box.Items.Add(names);
                 }
             }
             catch
@@ -123,7 +127,15 @@ namespace BookingSystem
 
         private void updateTimer_Tick(object sender, EventArgs e)
         {
-            userList.Update();
+            if (listChanged)
+            {
+                userList.Items.Clear();
+                for (int i = 0; i < box.Items.Count; i++)
+                {
+                    userList.Items.Add(box.Items[i]);
+                }
+                listChanged = false;
+            }
         }
     }
 }
