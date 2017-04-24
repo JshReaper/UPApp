@@ -37,7 +37,6 @@
             this.saveBtn = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.yesCheck = new System.Windows.Forms.CheckBox();
-            this.noCheck = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -117,22 +116,11 @@
             this.yesCheck.Text = "Yes";
             this.yesCheck.UseVisualStyleBackColor = true;
             // 
-            // noCheck
-            // 
-            this.noCheck.AutoSize = true;
-            this.noCheck.Location = new System.Drawing.Point(209, 197);
-            this.noCheck.Name = "noCheck";
-            this.noCheck.Size = new System.Drawing.Size(48, 21);
-            this.noCheck.TabIndex = 9;
-            this.noCheck.Text = "No";
-            this.noCheck.UseVisualStyleBackColor = true;
-            // 
             // CreateUserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(430, 362);
-            this.Controls.Add(this.noCheck);
             this.Controls.Add(this.yesCheck);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.saveBtn);
@@ -160,6 +148,5 @@
         private System.Windows.Forms.Button saveBtn;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox yesCheck;
-        private System.Windows.Forms.CheckBox noCheck;
     }
 }

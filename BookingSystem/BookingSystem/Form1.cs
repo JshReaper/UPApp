@@ -37,6 +37,7 @@ namespace BookingSystem
                 //admin
                 AdminCalendar.Show();
                 userManBtn.Show();
+                
             }
             if (loggedIn)
             {

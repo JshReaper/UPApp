@@ -28,14 +28,6 @@ namespace BookingSystem
             {
                 chooseAdmin = "1";
             }
-            else if (noCheck.Checked)
-            {
-                chooseAdmin = "0";
-            }
-            else if (yesCheck.Checked && noCheck.Checked)
-            {
-                MessageBox.Show("Vælg venligst kun en boks.");
-            }
 
             string user = "Insert into Users values(null, '" + userName_txt.Text + "', '" + password_txt.Text + "', '" + name_txt.Text + "', '" + chooseAdmin + "', 0, 0)";
             SQLiteCommand saveCommand = new SQLiteCommand(user, dbConn);
