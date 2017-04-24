@@ -38,6 +38,7 @@
             this.Loop = new System.Windows.Forms.Timer(this.components);
             this.cridentials = new System.Windows.Forms.Label();
             this.userManBtn = new System.Windows.Forms.Button();
+            this.Logout = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // UsernameBox
@@ -112,7 +113,7 @@
             // userManBtn
             // 
             this.userManBtn.Location = new System.Drawing.Point(51, 215);
-            this.userManBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.userManBtn.Margin = new System.Windows.Forms.Padding(2);
             this.userManBtn.Name = "userManBtn";
             this.userManBtn.Size = new System.Drawing.Size(149, 30);
             this.userManBtn.TabIndex = 5;
@@ -120,11 +121,22 @@
             this.userManBtn.UseVisualStyleBackColor = true;
             this.userManBtn.Click += new System.EventHandler(this.userManBtn_Click);
             // 
+            // Logout
+            // 
+            this.Logout.Location = new System.Drawing.Point(238, 8);
+            this.Logout.Name = "Logout";
+            this.Logout.Size = new System.Drawing.Size(75, 23);
+            this.Logout.TabIndex = 6;
+            this.Logout.Text = "Log ud";
+            this.Logout.UseVisualStyleBackColor = true;
+            this.Logout.Click += new System.EventHandler(this.Logout_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(315, 255);
+            this.Controls.Add(this.Logout);
             this.Controls.Add(this.userManBtn);
             this.Controls.Add(this.cridentials);
             this.Controls.Add(this.AdminCalendar);
@@ -153,6 +165,7 @@
         private System.Windows.Forms.Button Login_Button;
         private System.Windows.Forms.Label cridentials;
         private System.Windows.Forms.Button userManBtn;
+        private System.Windows.Forms.Button Logout;
     }
 }
 

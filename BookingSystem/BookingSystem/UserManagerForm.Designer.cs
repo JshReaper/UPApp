@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.userList = new System.Windows.Forms.ListBox();
             this.infoBox = new System.Windows.Forms.TextBox();
             this.deleteBtn = new System.Windows.Forms.Button();
             this.newUser = new System.Windows.Forms.Button();
+            this.updateTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // userList
@@ -73,6 +75,12 @@
             this.newUser.UseVisualStyleBackColor = true;
             this.newUser.Click += new System.EventHandler(this.newUser_Click);
             // 
+            // updateTimer
+            // 
+            this.updateTimer.Enabled = true;
+            this.updateTimer.Interval = 40;
+            this.updateTimer.Tick += new System.EventHandler(this.updateTimer_Tick);
+            // 
             // UserManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -90,10 +98,10 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox userList;
         private System.Windows.Forms.TextBox infoBox;
         private System.Windows.Forms.Button deleteBtn;
         private System.Windows.Forms.Button newUser;
+        public System.Windows.Forms.ListBox userList;
+        private System.Windows.Forms.Timer updateTimer;
     }
 }

@@ -28,16 +28,44 @@ namespace BookingSystem
 
         private void Loop_Tick(object sender, EventArgs e)
         {
-            if (isAdmin && loggedIn)
+            if (!isAdmin && loggedIn)
             {
+                //user
+            }
+            else if (isAdmin && loggedIn)
+            {
+                //admin
                 AdminCalendar.Show();
                 userManBtn.Show();
+                
+            }
+            if (loggedIn)
+            {
+                //all
+                Logout.Show();
+                
             }
             else
             {
+                //not logged in
+                ////
+                //TOHIDE
+                ////
                 AdminCalendar.Hide();
                 userManBtn.Hide();
+                Logout.Hide();
+                ////
+                //TOSHOW
+                ////
+                UsernameBox.Show();
+                PasswordBox.Show();
+                Login_Button.Show();
+                BrugerLabel.Show();
+                KodeLabel.Show();
+                cridentials.Show();
             }
+            
+           
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -116,7 +144,9 @@ namespace BookingSystem
         {
             loggedIn = true;
             UsernameBox.Hide();
+            UsernameBox.Text = "";
             PasswordBox.Hide();
+            PasswordBox.Text = "";
             Login_Button.Hide();
             BrugerLabel.Hide();
             KodeLabel.Hide();
@@ -133,6 +163,12 @@ namespace BookingSystem
             UserManagerForm userMan = new UserManagerForm();
 
             userMan.ShowDialog();
+        }
+
+        private void Logout_Click(object sender, EventArgs e)
+        {
+            loggedIn = false;
+
         }
     }
 }
