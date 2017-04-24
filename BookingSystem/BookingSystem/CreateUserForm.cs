@@ -49,6 +49,7 @@ namespace BookingSystem
                 {
                     
                 }
+                Close();
             }
             catch (Exception ex)
             {

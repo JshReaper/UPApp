@@ -132,7 +132,7 @@ namespace BookingSystem
         {
             UserManagerForm userMan = new UserManagerForm();
 
-            userMan.Show();
+            userMan.ShowDialog();
         }
     }
 }
