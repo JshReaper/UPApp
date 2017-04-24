@@ -42,6 +42,7 @@ namespace BookingSystem
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            DatabaseManager.GenerateDataBase();
             isAdmin = true;
             AdminCalendar.ShowWeekNumbers = true;
         }
@@ -99,7 +100,6 @@ namespace BookingSystem
 
         private void Login_Button_Click(object sender, EventArgs e)
         {
-            DatabaseManager.GenerateDataBase();
             if (DatabaseManager.Authenticate(UsernameBox.Text, PasswordBox.Text))
             {
                 userID = DatabaseManager.FindID(UsernameBox.Text);
