@@ -161,8 +161,8 @@ namespace BookingSystem
         private void userManBtn_Click(object sender, EventArgs e)
         {
             UserManagerForm userMan = new UserManagerForm();
-
-            userMan.Show();
+            UserManagerForm.FillList();
+            userMan.ShowDialog();
         }
 
         private void Logout_Click(object sender, EventArgs e)

@@ -17,15 +17,13 @@ namespace BookingSystem
         public UserManagerForm()
         {
             InitializeComponent();
-            FillList();
         }
         static ListBox box = new ListBox();
-        static bool listChanged;
+        public static bool listChanged;
 
         public static void FillList()
         {
             box.Items.Clear();
-            listChanged = true;
             SQLiteConnection dbConn = new SQLiteConnection("data source = Data.db;Version=3;");
             dbConn.Open();
 
@@ -50,6 +48,8 @@ namespace BookingSystem
             }
             dbConn.Close();
             dbConn.Dispose();
+
+            listChanged = true;
         }
 
         private void userList_SelectedIndexChanged(object sender, EventArgs e)

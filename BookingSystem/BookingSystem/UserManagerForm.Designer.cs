@@ -78,7 +78,7 @@
             // updateTimer
             // 
             this.updateTimer.Enabled = true;
-            this.updateTimer.Interval = 40;
+            this.updateTimer.Interval = 1;
             this.updateTimer.Tick += new System.EventHandler(this.updateTimer_Tick);
             // 
             // UserManagerForm
