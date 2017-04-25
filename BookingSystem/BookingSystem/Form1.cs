@@ -19,6 +19,7 @@ namespace BookingSystem
         public Form1()
         {
             InitializeComponent();
+
         }
 
         private void AdminCalendar_DateChanged(object sender, DateRangeEventArgs e)
@@ -71,12 +72,33 @@ namespace BookingSystem
         private void Form1_Load(object sender, EventArgs e)
         {
             DatabaseManager.GenerateDataBase();
+
+            foreach (var date in GetDates(AdminCalendar.SelectionStart.Year, AdminCalendar.SelectionStart.Month))
+            {
+                AdminCalendar.SetSelectionRange(date,date);
+                if (DatabaseManager.TaskExist(date.Day, date.Month, date.Year))
+                {
+
+                }
+            }
             isAdmin = true;
             AdminCalendar.ShowWeekNumbers = true;
         }
+        List<DateTime> GetDates(int year, int month)
+        {
+            var dates = new List<DateTime>();
 
+            // Loop from the first day of the month until we hit the next month, moving forward a day at a time
+            for (var date = new DateTime(year, month, 1); date.Month == month; date = date.AddDays(1))
+            {
+                dates.Add(date);
+            }
+
+            return dates;
+        }
         private void AdminCalendar_DateSelected(object sender, DateRangeEventArgs e)
         {
+            
             var taskForm = new CreateTaskForm
             {
                 Day = AdminCalendar.SelectionStart.Day,
@@ -109,8 +131,15 @@ namespace BookingSystem
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            
+            if (DatabaseManager.TaskExist(taskForm.Day, taskForm.Month, taskForm.Year))
+            {
+                ErrorForm error = new ErrorForm("opgave allerede oprettet på valgte dato");
+                error.ShowDialog();
+            }
+            else
+            {
                 taskForm.ShowDialog();
+            }
         }
 
 

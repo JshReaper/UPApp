@@ -233,5 +233,48 @@ namespace BookingSystem
                 c.Dispose();
             }
         }
+
+        public static bool TaskExist(int day, int month, int year)
+        {
+            string query = "select * from Tasks where day =" + day + ";";
+            using (SQLiteConnection c = new SQLiteConnection("data source = Data.db;Version=3;"))
+            {
+                c.Open();
+                try
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand(query, c))
+                    {
+                        using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                        {
+                            int datamonth = 0;
+                            int datayear = 0;
+                            while (rdr.Read())
+                            {
+                                datamonth = rdr.GetInt32(rdr.GetOrdinal("month"));
+
+                                datayear = rdr.GetInt32(rdr.GetOrdinal("year"));
+                            }
+                            cmd.Dispose();
+                            rdr.Dispose();
+                            if (datayear == year && datamonth == month)
+                            {
+
+                                c.Close();
+                                c.Dispose();
+                                return true;
+                            }
+                        }
+                    }
+                }
+                catch
+                {
+                    // ignored
+                }
+
+                c.Close();
+                c.Dispose();
+            }
+            return false;
+        }
     }
 }
