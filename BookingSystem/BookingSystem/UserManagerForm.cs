@@ -119,7 +119,7 @@ namespace BookingSystem
 
         private void newUser_Click(object sender, EventArgs e)
         {
-            CreateUserForm userForm = new CreateUserForm();
+            CreateUserForm userForm = new CreateUserForm(false);
 
 
             userForm.Show();
