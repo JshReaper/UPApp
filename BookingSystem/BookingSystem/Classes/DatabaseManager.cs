@@ -27,12 +27,12 @@ namespace BookingSystem
                 string userTable = "create table Users (id integer primary key, Username string, Password string, Name string, IsAdmin bool, WorkingDays integer, CleaningDays integer)";
                 SQLiteCommand commandOnCreate = new SQLiteCommand(userTable, dbConnOnCreate);
                 commandOnCreate.ExecuteNonQuery();
-                string user = "Insert into Users values(null, \"admin\", \"admin\", \"ADMINISTRATOR\", 1, 0, 0)";
-                commandOnCreate = new SQLiteCommand(user, dbConnOnCreate);
-                commandOnCreate.ExecuteNonQuery();
-                user = "Insert into Users values(null, \"poul\", \"poul\", \"Poul Erik Mågensen\", 0, 0, 0)";
-                commandOnCreate = new SQLiteCommand(user, dbConnOnCreate);
-                commandOnCreate.ExecuteNonQuery();
+                //string user = "Insert into Users values(null, \"admin\", \"admin\", \"ADMINISTRATOR\", 1, 0, 0)";
+                //commandOnCreate = new SQLiteCommand(user, dbConnOnCreate);
+                //commandOnCreate.ExecuteNonQuery();
+                //user = "Insert into Users values(null, \"poul\", \"poul\", \"Poul Erik Mågensen\", 0, 0, 0)";
+                //commandOnCreate = new SQLiteCommand(user, dbConnOnCreate);
+                //commandOnCreate.ExecuteNonQuery();
                 string workTable = "create table Tasks (id integer primary key, day integer, month integer, year integer, assignee integer, type bool, start string, end string )";
                 commandOnCreate = new SQLiteCommand(workTable, dbConnOnCreate);
                 commandOnCreate.ExecuteNonQuery();
@@ -46,6 +46,41 @@ namespace BookingSystem
             }
         }
 
+        public static bool DoesUserExist()
+        {
+            string query = "select * from Users where id =" + "1" + ";";
+            using (SQLiteConnection c = new SQLiteConnection("data source = Data.db;Version=3;"))
+            {
+                c.Open();
+                try
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand(query, c))
+                    {
+                        using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                        {
+                            while (rdr.Read())
+                            {
+                                if (rdr.HasRows)
+                                {
+                                    cmd.Dispose();
+                                    rdr.Dispose();
+                                    return true;
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+                catch
+                {
+                    // ignored
+                }
+
+                c.Close();
+                c.Dispose();
+            }
+            return false;
+        }
         /// <summary>
         /// This method asks the database if there is a user by the inserted name in the database, if there is procede to check if 
         /// the password is correct and then if it is, authenticate will return true and user will be allowed access.

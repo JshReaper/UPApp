@@ -14,8 +14,10 @@ namespace BookingSystem
     public partial class CreateUserForm : Form
     {
         UserManagerForm userMan = new UserManagerForm();
-        public CreateUserForm()
+        private bool firstBoot;
+        public CreateUserForm(bool firstBoot)
         {
+            this.firstBoot = firstBoot;
             InitializeComponent();
         }
 
@@ -50,6 +52,19 @@ namespace BookingSystem
             }
             dbConn.Close();
             dbConn.Dispose();
+        }
+
+        private void CreateUserForm_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void loop_Tick(object sender, EventArgs e)
+        {
+            if (firstBoot)
+            {
+                yesCheck.Checked = true;
+            }
         }
     }
 }

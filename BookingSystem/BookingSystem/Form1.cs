@@ -72,7 +72,11 @@ namespace BookingSystem
         private void Form1_Load(object sender, EventArgs e)
         {
             DatabaseManager.GenerateDataBase();
-
+            if (!DatabaseManager.DoesUserExist())
+            {
+                CreateUserForm adminCreateUserForm = new CreateUserForm(true);
+                adminCreateUserForm.ShowDialog();
+            } 
             foreach (var date in GetDates(AdminCalendar.SelectionStart.Year, AdminCalendar.SelectionStart.Month))
             {
                 AdminCalendar.SetSelectionRange(date,date);
