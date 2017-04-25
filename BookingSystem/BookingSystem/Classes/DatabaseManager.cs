@@ -160,6 +160,8 @@ namespace BookingSystem
 
             //end logic
             dbCon.Close();
+            dbCom.Dispose();
+            dbCom.Dispose();
             Debug.WriteLine("Database close");
         }
 
@@ -223,7 +225,8 @@ namespace BookingSystem
                             string workingDaysString = rdr.GetInt32(rdr.GetOrdinal("WorkingDays")).ToString();
                             string cleaningDaysString = rdr.GetInt32(rdr.GetOrdinal("CleaningDays")).ToString();
                             id = rdr.GetInt32(rdr.GetOrdinal("ID"));
-                            infoBox.Text = "Navn: " + nameString + "\n" + "Brugernavn: " + userNameString + "\n" + "Arbejdsdage: " + workingDaysString + "\n" + "Rengøringsdage: " + cleaningDaysString;
+                            infoBox.Text = "Navn: " + nameString + "\r\n" + "Brugernavn: " + userNameString + "\r\n" + "Arbejdsdage: " + workingDaysString + "\r\n" + "Rengøringsdage: " + cleaningDaysString;
+                            infoBox.WordWrap = false;
                         }
                         cmd.Dispose();
                         rdr.Dispose();
@@ -231,6 +234,113 @@ namespace BookingSystem
                 }
                 c.Close();
                 c.Dispose();
+            }
+        }
+        public static bool IsAdmin(string userName)
+        {
+            bool admin = false;
+            string find = "select * from Users where Username = '"+ userName +"';";
+            SQLiteConnection dbCon = new SQLiteConnection("Data Source=Data.db;Version=3;");
+            SQLiteCommand dbCom = new SQLiteCommand(find, dbCon);
+            dbCon.Open();
+            Debug.WriteLine("Database open");
+            //logic
+            using (SQLiteDataReader rdr = dbCom.ExecuteReader())
+            {
+                while (rdr.Read())
+                {
+
+                    if(rdr.GetBoolean(rdr.GetOrdinal("IsAdmin")) == true)
+                    {
+                        admin = rdr.GetBoolean(rdr.GetOrdinal("IsAdmin"));
+                        
+                    }
+                }
+                dbCom.Dispose();
+                rdr.Dispose();
+            }
+
+            //end logic
+            dbCon.Close();
+            dbCon.Dispose();
+            Debug.WriteLine("Database close");
+            return admin;
+        }
+
+        public static void LoadTasks(ref ComboBox taskBox, ref int[] array)
+        {
+            string find = "select count(id) from Tasks where assignee = 0";
+            SQLiteConnection dbCon = new SQLiteConnection("Data Source=Data.db;Version=3;");
+            SQLiteCommand dbCom = new SQLiteCommand(find, dbCon);
+            dbCon.Open();
+            Debug.WriteLine("Database open");
+            //logic
+            int count = 0;
+            using (SQLiteDataReader rdr = dbCom.ExecuteReader())
+            {
+                while (rdr.Read())
+                {
+                   count = Convert.ToInt32(rdr[0]);
+                }
+                
+            }
+            find = "select * from Tasks where assignee = 0";
+            dbCom = new SQLiteCommand(find, dbCon);
+            using (SQLiteDataReader rdr = dbCom.ExecuteReader())
+            {
+
+                int a = 0;
+                while (rdr.Read())
+                {
+                    if (a == 0)
+                    {
+                        array = new int[count];
+                        a++;
+                    }
+                    if (rdr.HasRows)
+                    {
+
+                        if (rdr.GetInt32(rdr.GetOrdinal("assignee")) == 0)
+                        {
+                            if (rdr.GetBoolean(rdr.GetOrdinal("Type")) == false)
+                            {
+                                string box = string.Format("Dato: {0}-{1}-{2}  Tid: {3} - {4}  Arbejdsdag", rdr[1], rdr[2], rdr[3], rdr[6], rdr[7]);
+                                taskBox.Items.Add(box);
+                                array[a - 1] = Convert.ToInt32(rdr[0]);
+                            }
+                            if (rdr.GetBoolean(rdr.GetOrdinal("Type")) == true)
+                            {
+                                string box = string.Format("Dato: {0}-{1}-{2}  Tid: {3} - {4}  Rengøring", rdr[1], rdr[2], rdr[3], rdr[6], rdr[7]);
+                                taskBox.Items.Add(box);
+                                array[a - 1] = Convert.ToInt32(rdr[0]);
+                            }
+                        }
+
+                    }
+                    a++;
+                }
+                dbCom.Dispose();
+                rdr.Dispose();
+            }
+
+            //end logic
+            dbCon.Close();
+            dbCon.Dispose();
+            Debug.WriteLine("Database close");
+        }
+
+        public static void AcceptTask(int userID, int taskID)
+        {
+            string task = "update Tasks set assignee = " + userID + " where ID = " + taskID + ";";
+            using (SQLiteConnection c = new SQLiteConnection("Data Source=Data.db;Version=3;"))
+            {
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(task, c))
+                {
+                    cmd.ExecuteNonQuery();
+                    cmd.Dispose();
+                }
+                c.Close();
             }
         }
     }

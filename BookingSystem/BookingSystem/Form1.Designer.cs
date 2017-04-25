@@ -39,6 +39,8 @@
             this.cridentials = new System.Windows.Forms.Label();
             this.userManBtn = new System.Windows.Forms.Button();
             this.Logout = new System.Windows.Forms.Button();
+            this.TaskComboBox = new System.Windows.Forms.ComboBox();
+            this.AcceptTaskButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // UsernameBox
@@ -131,11 +133,32 @@
             this.Logout.UseVisualStyleBackColor = true;
             this.Logout.Click += new System.EventHandler(this.Logout_Click);
             // 
+            // TaskComboBox
+            // 
+            this.TaskComboBox.FormattingEnabled = true;
+            this.TaskComboBox.Location = new System.Drawing.Point(29, 52);
+            this.TaskComboBox.Name = "TaskComboBox";
+            this.TaskComboBox.Size = new System.Drawing.Size(262, 21);
+            this.TaskComboBox.TabIndex = 7;
+            this.TaskComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // AcceptTaskButton
+            // 
+            this.AcceptTaskButton.Location = new System.Drawing.Point(208, 97);
+            this.AcceptTaskButton.Name = "AcceptTaskButton";
+            this.AcceptTaskButton.Size = new System.Drawing.Size(83, 30);
+            this.AcceptTaskButton.TabIndex = 8;
+            this.AcceptTaskButton.Text = "Accepter";
+            this.AcceptTaskButton.UseVisualStyleBackColor = true;
+            this.AcceptTaskButton.Click += new System.EventHandler(this.AcceptTaskButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(315, 255);
+            this.Controls.Add(this.AcceptTaskButton);
+            this.Controls.Add(this.TaskComboBox);
             this.Controls.Add(this.Logout);
             this.Controls.Add(this.userManBtn);
             this.Controls.Add(this.cridentials);
@@ -166,6 +189,8 @@
         private System.Windows.Forms.Label cridentials;
         private System.Windows.Forms.Button userManBtn;
         private System.Windows.Forms.Button Logout;
+        private System.Windows.Forms.ComboBox TaskComboBox;
+        private System.Windows.Forms.Button AcceptTaskButton;
     }
 }
 

@@ -15,6 +15,7 @@ namespace BookingSystem
         static int userID = 0;
         bool loggedIn;
         bool isAdmin;
+        int[] indexArray;
 
         public Form1()
         {
@@ -31,6 +32,9 @@ namespace BookingSystem
             if (!isAdmin && loggedIn)
             {
                 //user
+                TaskComboBox.Show();
+                AcceptTaskButton.Show();
+
             }
             else if (isAdmin && loggedIn)
             {
@@ -54,6 +58,8 @@ namespace BookingSystem
                 AdminCalendar.Hide();
                 userManBtn.Hide();
                 Logout.Hide();
+                TaskComboBox.Hide();
+                AcceptTaskButton.Hide();
                 ////
                 //TOSHOW
                 ////
@@ -143,14 +149,18 @@ namespace BookingSystem
         private void Login()
         {
             loggedIn = true;
+            isAdmin = DatabaseManager.IsAdmin(UsernameBox.Text);
             UsernameBox.Hide();
             UsernameBox.Text = "";
             PasswordBox.Hide();
             PasswordBox.Text = "";
+            cridentials.Text = "";
             Login_Button.Hide();
             BrugerLabel.Hide();
             KodeLabel.Hide();
             cridentials.Hide();
+            DatabaseManager.LoadTasks(ref TaskComboBox, ref indexArray);
+
         }
 
         private void BrugerLabel_Paint(object sender, PaintEventArgs e)
@@ -168,7 +178,22 @@ namespace BookingSystem
         private void Logout_Click(object sender, EventArgs e)
         {
             loggedIn = false;
+            TaskComboBox.Items.Clear();
 
         }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AcceptTaskButton_Click(object sender, EventArgs e)
+        {
+            DatabaseManager.AcceptTask(userID,indexArray[TaskComboBox.SelectedIndex]);
+            TaskComboBox.Items.Clear();
+            TaskComboBox.Text = "";
+            DatabaseManager.LoadTasks(ref TaskComboBox, ref indexArray);
+        }
+
     }
 }
